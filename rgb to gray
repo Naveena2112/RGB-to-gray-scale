@@ -1,0 +1,40 @@
+clc;
+clear all;
+close all;
+% To read color image & convert into gray
+im=imread('Flowers001.jpg');
+img=rgb2gray(im);
+figure,subplot(2,2,1),imshow(im),title('original RGB image');
+subplot(2,2,2),imshow(img),title('Gray image');
+%Image_Neg
+im_neg=255-double(im);
+figure,subplot(2,2,3),imshow(uint8(im_neg));title('Negative Image');
+%Point _Process
+%To Increase brightness of Image
+b_incr=im+70;
+subplot(2,2,1),imshow(b_incr),title('Brightened image');
+% To suppress Brightness
+b_decr=im-50;
+subplot(2,2,2),imshow(b_decr),title('Brighteness suppressed image');
+% To decrease Contrast
+figure,imshow(img),title('Gray image');
+C_decr=im*0.6;
+figure,subplot(2,2,3),imshow(C_decr),title('Contrast decreased image');
+original_image_contrast=max(max(img))-min(min(img));
+AfterContrastadjustment_image_contrast=max(max(C_decr))-min(min(C_decr));
+%To increase Contrast
+C_incr=im*2;
+subplot(2,2,4),imshow(C_incr),title('Contrast increased image');
+original_image_contrast=max(max(im))-min(min(im));
+After_increment_image_contrast=max(max(C_incr))-min(min(C_incr));
+% Scaling (Resize)
+I=imread('Flowers001.jpg');
+subplot(2,2,1); subimage(I); title('Original Image');
+s=input('Enter Scaling Factor');
+j=imresize(I,s);
+subplot(2,2,2); subimage(j); title('Scaled Image');
+% Rotation
+K=imrotate(j,60);
+subplot(2,2,3); imshow(K); title('Rotated Image 60deg');
+R=imrotate(j,45);
+subplot(2,2,4); imshow(R); title('Rotated Image 45deg');
